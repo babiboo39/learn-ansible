@@ -1,0 +1,35 @@
+---
+- name: Setup Nginx
+  hosts: localhost
+  connection: local
+  become: yes
+
+  tasks:
+    - name: Update
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+    
+    - name: Install Nginx
+      apt:
+        name: ['nginx']
+        state: latest
+
+    - name: Copy Nginx config file
+      copy:
+        src: ./conf/nginx.conf
+        dest: /etc/nginx/sites-available/default
+    - name: Enable Config
+      file:
+        src: /etc/nginx/sites-available/default
+        dest: /etc/nginx/sites-enabled/default
+        state: link
+    - name: Copy index.html
+      template:
+        src: ./templates/index.html
+        dest: /usr/share/nginx/html/index.html
+        mode: 0644
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
