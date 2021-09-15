@@ -17,16 +17,16 @@
         name: nginx
         state: present
     
-    - name: Copy Nginx config file
-      copy:
-        src: ../conf/nginx.conf
-        dest: /etc/nginx/sites-available/default
+    # - name: Copy Nginx config file
+    #   copy:
+    #     src: ../conf/nginx.conf
+    #     dest: /etc/nginx/sites-available/default
     
-    - name: Enable Config
-      file:
-        src: /etc/nginx/sites-available/default
-        dest: /etc/nginx/sites-enabled/default
-        state: link
+    # - name: Enable Config
+    #   file:
+    #     src: /etc/nginx/sites-available/default
+    #     dest: /etc/nginx/sites-enabled/default
+    #     state: link
     
     - name: Copy index.html
       template:
