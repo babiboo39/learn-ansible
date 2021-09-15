@@ -16,16 +16,12 @@
       yum:
         name: nginx
         state: present
-    - name: Remove existing nginx conf
-      file:
-        path: /etc/nginx/nginx/nginx.conf
-        state: absent
 
     - name: Copy nginx config
       copy:
-        src: ./conf/nginx.conf
-        dest: /etc/nginx/nginx.conf
-        
+        src: ./conf/site.conf
+        dest: /etc/nginx/conf.d/site.conf
+
     - name: Copy index.html
       template:
         src: ../templates/index.html
