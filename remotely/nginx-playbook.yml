@@ -17,11 +17,6 @@
         name: nginx
         state: present
 
-    - name: Copy nginx config
-      copy:
-        src: ./conf/site.conf
-        dest: /etc/nginx/conf.d/site.conf
-
     - name: Copy index.html
       template:
         src: ../templates/index.html
