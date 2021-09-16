@@ -1,29 +1,52 @@
 ---
 - name: Install Nginx on remote server
   hosts: remoteserver
-  become: True
+  become: true
 
   vars:
     ansible_user: ruli
     ansible_ssh_private_key_file: ~/.ssh/id_rsa
-  tasks:
-    - name: Add epel-release repo
-      yum:
-        name: epel-release
-        state: present
-    
-    - name: Install Nginx
-      yum:
-        name: nginx
-        state: present
+  
+- hosts: remoteserver
+  become: true
+  roles:
+    - preparer
 
-    - name: Copy index.html
-      template:
-        src: ../templates/index.html
-        dest: /usr/share/nginx/html/index.html
-        mode: 0644
+- hosts: remoteserver
+  become: true
+  roles:
+    - installer
+
+- hosts: remoteserver
+  become: true
+  roles:
+    - filing
+
+- hosts: remoteserver
+  become: true
+  roles:
+    - restarter
+  
+  
+  
+  # tasks:
+  #   - name: Add epel-release repo
+  #     yum:
+  #       name: epel-release
+  #       state: present
     
-    - name: Restart Nginx
-      service:
-        name: nginx
-        state: restarted
+  #   - name: Install Nginx
+  #     yum:
+  #       name: nginx
+  #       state: present
+
+  #   - name: Copy index.html
+  #     template:
+  #       src: ../templates/index.html
+  #       dest: /usr/share/nginx/html/index.html
+  #       mode: 0644
+    
+  #   - name: Restart Nginx
+  #     service:
+  #       name: nginx
+  #       state: restarted
