@@ -1,0 +1,5 @@
+- name: Copy index.html
+  copy:
+    src: index.html
+    dest: /usr/share/nginx/html/index.html
+    mode: 0644
