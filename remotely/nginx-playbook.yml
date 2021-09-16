@@ -27,26 +27,3 @@
   roles:
     - restarter
   
-  
-  
-  # tasks:
-  #   - name: Add epel-release repo
-  #     yum:
-  #       name: epel-release
-  #       state: present
-    
-  #   - name: Install Nginx
-  #     yum:
-  #       name: nginx
-  #       state: present
-
-  #   - name: Copy index.html
-  #     template:
-  #       src: ../templates/index.html
-  #       dest: /usr/share/nginx/html/index.html
-  #       mode: 0644
-    
-  #   - name: Restart Nginx
-  #     service:
-  #       name: nginx
-  #       state: restarted
